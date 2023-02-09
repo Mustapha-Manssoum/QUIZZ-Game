@@ -1,13 +1,13 @@
-Développement d’une application web de quiz qu’on a nommé QuiTSE.
+#Développement d’une application web de quiz qu’on a nommé QuiTSE.
 
-Ce projet comporte principalement 3 grandes parties:
-	- L’entrainement d’un modèle machine learning à fin qu’il reconnaisse des audios 
-	- Le développement d’une interface utilisateur (Front-End + Back-End)
-	- Déploiement de l’application dans un cloud AWS avec stockage des données, modèles et réponses dans le cloud aussi.
+##Ce projet comporte principalement 3 grandes parties:
+	###- L’entrainement d’un modèle machine learning à fin qu’il reconnaisse des audios 
+	###- Le développement d’une interface utilisateur (Front-End + Back-End)
+	###- Déploiement de l’application dans un cloud AWS avec stockage des données, modèles et réponses dans le cloud aussi.
 
-Partie 1: ML: Modèle de reconnaissance vocale:
+##Partie 1: ML: Modèle de reconnaissance vocale:
 
-speech_recognition.ipynb
+###speech_recognition.ipynb
 
 On a utilisé pour la reconnaissance vocale le model « speech_recognition », une bibliothèque Python qui utilise l’API de Google Speech Recognition.
 1 -Le modèle prend comme entrée un audio qui sera enregistrer en utilisant le microphone 🎙, 
