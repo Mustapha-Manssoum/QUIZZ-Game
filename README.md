@@ -10,6 +10,7 @@
 ### speech_recognition.ipynb
 
 On a utilisé pour la reconnaissance vocale le model « speech_recognition », une bibliothèque Python qui utilise l’API de Google Speech Recognition.
+
 1 -Le modèle prend comme entrée un audio qui sera enregistrer en utilisant le microphone 🎙, 
   -La méthode listen de l'objet recognizer est utilisée pour écouter l'audio provenant du microphone. L'objet audio est ensuite transmis à la méthode recognize_google, qui effectue la reconnaissance de la parole en utilisant Google Speech Recognition et en spécifiant que la reconnaissance doit être effectuée en français (fr-FR).
 
