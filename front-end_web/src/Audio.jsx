@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import AudioRecorder from "./audiorecorder";
 
 const RecordButton = () => {
   const [recording, setRecording] = useState(false);
@@ -48,15 +49,16 @@ const RecordButton = () => {
     <div>
     <h1>Question</h1>
     <p>{question}</p>
-    <form onSubmit={handleSubmit}>
+    <p>1: Toulouse  2: Nice  3: Marseille  4: Paris</p>
+    <AudioRecorder></AudioRecorder>
+    {/* <form onSubmit={handleSubmit}>
       {recording ? (
         <button onClick={stopRecording}>Stop</button>
       ) : (
         <button onClick={startRecording}>Start</button>
       )}
-    </form>
+    </form> */}
     <p>Score: {score}</p>
-
 
     </div>
   );
