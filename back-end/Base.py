@@ -1,3 +1,4 @@
+# ce fichier gere la communication dans la V1 qu'on a abondonné 
 # ce fichier decrit  la gestion de la communication avec sa base de donnees
 # rédiger par zouine safouane
 import sqlite3
