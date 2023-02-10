@@ -34,8 +34,32 @@ On a répartis notre data à train_set et test_set, on a utilisé comme modèle 
 La fonction accuracy_score est utilisée pour évaluer la précision du modèle en comparant les labels réelles y_train avec les labels prédites y_pred. Le score de précision est stocké dans la variable train_accuracy. On fait de même pour data test. 
 
 ## Partie 2: Développement de l'interface utilisateur: Back-End + Front-End
+# Front-End
+Pour cette partie on a developé sur react. La première page est la page de login. 
+
+Login : représente un formulaire de connexion. Le composant utilise la fonctionnalité de gestion d'état de React avec le hook useState pour gérer les valeurs des entrées email et mot de passe. La fonction handleSubmit est utilisée pour gérer l'événement de soumission du formulaire et afficher l'email dans la console. Les entrées du formulaire sont des composants contrôlés et leurs valeurs sont stockées dans les variables d'état 'email' et 'pass'. Il y a un bouton qui, lorsqu'il est cliqué, appelle la fonction props.onFormSwitch et passe l'argument 'Quiz' en argument. Il y a également un bouton qui, lorsqu'il est cliqué, appelle la fonction props.onFormSwitch et passe l'argument 'register' en argument.
+
+register : gère l'inscription d'un nouvel utilisateur. Il utilise la méthode useState pour gérer les états de trois champs de formulaire : email, mot de passe et nom complet. Lorsque l'utilisateur soumet le formulaire en cliquant sur le bouton "S'inscrire", la méthode handleSubmit est appelée pour prévenir la soumission par défaut et afficher les données entrées par l'utilisateur dans la console. Si l'utilisateur a déjà un compte, il peut cliquer sur le bouton "Déjà inscrit ? Connectez-vous ici" pour basculer vers le formulaire de connexion.
+
+Quiz : permet à un utilisateur de choisir des thèmes pour un quiz. Le composant utilise un tableau de thèmes appelé themes et stocke les thèmes sélectionnés par l'utilisateur dans un état local appelé selectedThemes.
+Lorsqu'un utilisateur clique sur une case à cocher, la fonction handleChange est appelée et met à jour selectedThemes en ajoutant ou en supprimant le thème correspondant.
+Le composant affiche un formulaire qui affiche tous les thèmes contenus dans le tableau themes sous forme de cases à cocher. Si un thème est sélectionné, sa case à cocher sera cochée.
+Enfin, il y a un bouton qui appelle une fonction onFormSwitch passée en tant que propriété au composant pour permettre à l'utilisateur de démarrer le quiz.
+
+Audio : crée un composant React qui permet de faire un enregistrement audio. Il utilise une bibliothèque appelée "AudioRecorder" pour enregistrer la voix de l'utilisateur. Il affiche également une question et une sélection de réponses et calcule le score de l'utilisateur en fonction de sa réponse. Le score est affiché à l'écran.
+
+#Back-End
+Cette partie est basé sur NodeJS
+
+app : Ce code crée une application Express et utilise des routes pour les questions et les utilisateurs. Il utilise également le middleware CORS pour permettre les demandes croisées et écoute sur le port 3033 en affichant un message de démarrage du serveur.
+
+Question : Ce code importe express et le modèle Question et Reponse de la base de données.
+Il crée un routeur pour les questions, avec deux routes. La première route est pour obtenir toutes les questions ou une catégorie spécifique de questions en fonction des paramètres de requête. La deuxième route est pour créer une nouvelle question avec des réponses associées.
+
+user : Ce code définit un routeur pour les utilisateurs en utilisant le framework Express.js. Le routeur contient deux routes principales: une pour récupérer toutes les réponses enregistrées et une autre pour envoyer de nouvelles réponses. La première route utilise la méthode findAll pour récupérer toutes les entrées dans la table des réponses et les renvoie en utilisant res.send. La deuxième route utilise la méthode post pour accepter des données envoyées par l'utilisateur, les affiche en utilisant console.log et renvoie un message simple "post user". Finalement, le routeur est exporté pour être utilisé dans un autre fichier.
 
 
+ 
 ## Partie 3: Hébergement Cloud
 
 
