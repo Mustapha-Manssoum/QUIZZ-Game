@@ -33,7 +33,12 @@ On a répartis notre data à train_set et test_set, on a utilisé comme modèle 
 
 La fonction accuracy_score est utilisée pour évaluer la précision du modèle en comparant les labels réelles y_train avec les labels prédites y_pred. Le score de précision est stocké dans la variable train_accuracy. On fait de même pour data test. 
 
-## Partie 2: Back-End
+## Partie 2: Développement de l'interface utilisateur: Back-End + Front-End
+
+
+## Partie 3: Hébergement Cloud
+
+
 
 
 
