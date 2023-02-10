@@ -34,7 +34,7 @@ On a répartis notre data à train_set et test_set, on a utilisé comme modèle 
 La fonction accuracy_score est utilisée pour évaluer la précision du modèle en comparant les labels réelles y_train avec les labels prédites y_pred. Le score de précision est stocké dans la variable train_accuracy. On fait de même pour data test. 
 
 ## Partie 2: Développement de l'interface utilisateur: Back-End + Front-End
-# Front-End
+### Front-End
 Pour cette partie on a developé sur react. La première page est la page de login. 
 
 Login : représente un formulaire de connexion. Le composant utilise la fonctionnalité de gestion d'état de React avec le hook useState pour gérer les valeurs des entrées email et mot de passe. La fonction handleSubmit est utilisée pour gérer l'événement de soumission du formulaire et afficher l'email dans la console. Les entrées du formulaire sont des composants contrôlés et leurs valeurs sont stockées dans les variables d'état 'email' et 'pass'. Il y a un bouton qui, lorsqu'il est cliqué, appelle la fonction props.onFormSwitch et passe l'argument 'Quiz' en argument. Il y a également un bouton qui, lorsqu'il est cliqué, appelle la fonction props.onFormSwitch et passe l'argument 'register' en argument.
@@ -48,7 +48,7 @@ Enfin, il y a un bouton qui appelle une fonction onFormSwitch passée en tant qu
 
 Audio : crée un composant React qui permet de faire un enregistrement audio. Il utilise une bibliothèque appelée "AudioRecorder" pour enregistrer la voix de l'utilisateur. Il affiche également une question et une sélection de réponses et calcule le score de l'utilisateur en fonction de sa réponse. Le score est affiché à l'écran.
 
-#Back-End
+### Back-End
 Cette partie est basé sur NodeJS
 
 app : Ce code crée une application Express et utilise des routes pour les questions et les utilisateurs. Il utilise également le middleware CORS pour permettre les demandes croisées et écoute sur le port 3033 en affichant un message de démarrage du serveur.
@@ -63,9 +63,10 @@ user : Ce code définit un routeur pour les utilisateurs en utilisant le framewo
 ## Partie 3: Hébergement Cloud
 
 Pour l'hébergement dans le cloud. 
-On utilise l'instance EC2 pour déployer la partie Back et front, la partie machinelearning est déployé avec une fonction lambda. Pour la base de données MySQL à travers RDS;
-Le back reccupére les questions du RDS et les transfère sous format json vers le front. 
-L'utilsateur répond en audio qui un fichier.wav qui se transfére vers la fonction lambda pour être traité. 
+On utilise l'instance EC2 pour déployer la partie Back et front, le modèle de machine learning entraînée est déployé dans une fonction lambda. Pour la base de données MySQL a été déployer dans un moteur de base de donnée RDS d'Amazon.
+Le back récupère les questions de RDS et les transfère sous format json vers le front. 
+L'utilsateur répond en audio. Un fichier ".wav" va être transféré vers la fonction lambda pour être traité et convertit en texte. 
+La fonction Lambda renvoie par la suite le texte vers le front.
 
 
 
