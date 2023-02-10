@@ -1,6 +1,7 @@
 
 import React, { useState } from "react";
 
+
 const themes = ["History", "Geography", "Sports"];
 
 export const ChooseThemes = (props) => {
@@ -17,6 +18,9 @@ export const ChooseThemes = (props) => {
 
   return (
     <div>
+      <header className="App-header" style={{display: 'flex', alignItems: 'center'}}>
+        
+      </header>
       <h3>Choose Themes for Your Quiz</h3>
       {themes.map((theme) => (
         <div key={theme}>

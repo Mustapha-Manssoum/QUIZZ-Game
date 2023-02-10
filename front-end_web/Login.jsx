@@ -42,6 +42,8 @@ export const Login = (props)=>{
 import React, { useState } from "react";
 import { useHistory } from 'react-router-dom';
 
+import logo from './logo.png';
+
 
 
 export const Login = (props) => {
@@ -54,8 +56,12 @@ export const Login = (props) => {
     }
 
     return (
+        
         <div className="auth-form-container">
+            <img src={logo} alt="logo"  width="120" height="100" style={{display: 'flex', alignItems: 'center'}}/>
+
             <h2>Login</h2>
+        
             <form className="login-form" onSubmit={handleSubmit}>
                 <label htmlFor="email">email</label>
                 <input value={email} onChange={(e) => setEmail(e.target.value)}type="email" placeholder="youremail@gmail.com" id="email" name="email" />

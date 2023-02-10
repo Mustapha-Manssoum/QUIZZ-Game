@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 
+import logo from './logo.png';
+
+
 export const Register = (props) => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
@@ -12,6 +15,8 @@ export const Register = (props) => {
 
     return (
         <div className="auth-form-container">
+            <img src={logo} alt="logo"  width="120" height="100" style={{display: 'flex', alignItems: 'center'}}/>
+
             <h2>Register</h2>
         <form className="register-form" onSubmit={handleSubmit}>
             <label htmlFor="name">Full name</label>
