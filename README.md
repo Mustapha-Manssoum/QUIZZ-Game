@@ -62,6 +62,11 @@ user : Ce code définit un routeur pour les utilisateurs en utilisant le framewo
  
 ## Partie 3: Hébergement Cloud
 
+Pour l'hébergement dans le cloud. 
+On utilise l'instance EC2 pour déployer la partie Back et front, la partie machinelearning est déployé avec une fonction lambda. Pour la base de données MySQL à travers RDS;
+Le back reccupére les questions du RDS et les transfère sous format json vers le front. 
+L'utilsateur répond en audio qui un fichier.wav qui se transfére vers la fonction lambda pour être traité. 
+
 
 
 
