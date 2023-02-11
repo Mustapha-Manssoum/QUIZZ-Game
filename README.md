@@ -40,7 +40,7 @@ Les détails de code se trouvent dans le dossier **back-end**<br>
 - La base de données des questions est stockée dans la solution de déployement de base de données relationnelles **RDS** proposée par AWS.
 <img src="https://user-images.githubusercontent.com/63628060/218280449-53dbd3de-d495-466c-a2cc-3ed268c1fd8b.png" alt="c" width="400" height="200"/>
 <br>
-- Tous les autres serveurs backend, frontend et l'API du modèle ML sont déployés sur une instance EC2 utilisant une image Ubuntu qui a été configurée pour prendre en charge tous les modules nécessaires pour assurer une communication adéquate entre les serveurs.<br>
+- Tous les autres serveurs backend, frontend et l'API du modèle ML sont déployés sur une instance EC2 utilisant une image Ubuntu qui a été configurée pour prendre en charge tous les modules nécessaires et modifier les groupes de sécurité afin de permettre au ports utilisés par les serveurs d'être atteints, pour assurer une communication adéquate entre les serveurs.<br>
 <img src="https://user-images.githubusercontent.com/63628060/218280741-8189e150-d9dc-4844-8a3b-0cc3fad72b68.png" alt="c" width="400" height="200"/>
 
 <br> 
