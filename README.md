@@ -1,74 +1,52 @@
-# Développement d’une application web de quiz qu’on a nommé QuiTSE.
+<h1 align="center"> Défiez vos connaissances avec QuiTSE : le Jeu de Quiz en ligne</h1>
+
+# Objectif : 
+L'objectif de ce projet est de concevoir une application web qui présente un jeu de Quiz, où les réponses sont données par l'utilisateur.rice à la voix.
+<br>
 
 ## Ce projet comporte principalement 3 grandes parties:
-	### - L’entrainement d’un modèle machine learning à fin qu’il reconnaisse des audios 
-	### - Le développement d’une interface utilisateur (Front-End + Back-End)
-	### - Déploiement de l’application dans un cloud AWS avec stockage des données, modèles et réponses dans le cloud aussi.
 
-## Partie 1: ML: Modèle de reconnaissance vocale:
+- La partie **Machine learning** concernant le modèle de reconnaissance vocal
+- Le développement de l'interface web et la communication avec la base de données (**Front-End** + **Back-End**)
+- Le déploiement de l’application dans le **cloud AWS** avec stockage de toutes les données.
 
-### speech_recognition.ipynb
+## Partie 1: Machine Learning: Modèle de reconnaissance vocale:
+Au cours de notre travail sur cette partie, nous avons commencé par apprendre un modèle à partir de zéro en utilisant les données que nous avons collectées, représentant des fichiers audio des mots suivants : **"un"**, **"deux"**, **"trois"** et **"quatre"**. Les données sont stockées selon leur classe dans le fichier **"new_data"** dans le dossier **"Model1"**. <br>
+Chaque classe contient 20 fichiers audio correspondant au mot approprié.<br>
+Le modèle d'apprentissage automatique que nous avons conçu consiste à parcourir les données classe par classe et à extraire les caractéristiques MFCC (Mel-frequency cepstrum) ainsi que le label de chaque fichier audio. Il crée ensuite un vecteur représentatif de cet audio en utilisant la moyenne et l'écart-type de ses caractéristiques MFCC. Toutes les caractéristiques sont stockées avec leur label dans une liste appelée "mfcc_features". Les données sont ensuite divisées en deux parties : un jeu de données d'entraînement et un jeu de données de validation. <br>
+Nous avons choisi l'algorithme SVM en tant que classificateur pour entraîner le modèle.<br>
+**Résultat:** <br>
+- Précision sur le jeu de données d'entraînement : **58.73%**<br>
+- Précision sur le jeu de données de validation : **56.25%**<br>
+Nous constatons que le modèle fonctionne assez bien, surtout avec un jeu de données aussi restreint. Pour améliorer sa précision, nous devons collecter plus de données. Étant donné que notre application doit être efficace et précise, nous avons choisi d'utiliser un modèle pré-entraîné de la bibliothèque **"speech_recognition"**, que nous vous présentons ci-dessous.<br>
+Le code de ce modèle se trouve dans le fichier **"Quizz model.ipynb"** dans le dossier "Model1".<br><br>
 
-On a utilisé pour la reconnaissance vocale le model « speech_recognition », une bibliothèque Python qui utilise l’API de Google Speech Recognition.
-
-1 -Le modèle prend comme entrée un audio qui sera enregistrer en utilisant le microphone 🎙.
-
--La méthode listen de l'objet recognizer est utilisée pour écouter l'audio provenant du microphone. L'objet audio est ensuite transmis à la méthode recognize_google, qui effectue la reconnaissance de la parole en utilisant Google Speech Recognition et en spécifiant que la reconnaissance doit être effectuée en français (fr-FR).
--La variable text stocke la réponse prononcé par l'utilisateur, qui va être comparée par la suite avec les réponses que nous avons définie pour notre quizz dans une base de données.
-
-2 -Le modèle prend comme entrée un fichier audio .
-  - La bibliothèque librosa fournit par Python, est utilisée pour charger et traiter des fichiers audio.
-  -  La fonction librosa.load est ensuite utilisée pour charger les données audio et la fréquence d'échantillonnage à partir du fichier audio dont il faut préciser le chemain d'accès .
- Par la suite on a utilisé la même bibliothèque cité dans la méthode1:  « speech_recognition » pour convertir l’audio en texte.
-
-
-
-### Quizz model.ipynb
-
-On a utilisé un script python qui va effectuer le traitement de fichiers audio. Il définit deux listes, labels et mfcc_features, pour stocker les étiquettes et les caractéristiques MFCC respectivement.
-
-On a utilisé, par la suite, la fonction os.listdir pour parcourir tous les sous-dossiers dans le dossier "new_data". Pour chaque sous-dossier, il parcourt également tous les fichiers audio à l'aide de os.listdir. Pour chaque fichier audio, il utilise la bibliothèque librosa pour charger le fichier audio et extraire les caractéristiques MFCC.
-
-On a répartis notre data à train_set et test_set, on a utilisé comme modèle pour entraîner la data; SVC (Support Vector Classification) du module sklearn.svm. L'objet entraîné est stocké dans la variable H. Le modèle peut maintenant être utilisé pour prédire des labels pour des données de test en utilisant la méthode predict.
-
-La fonction accuracy_score est utilisée pour évaluer la précision du modèle en comparant les labels réelles y_train avec les labels prédites y_pred. Le score de précision est stocké dans la variable train_accuracy. On fait de même pour data test. 
+Afin de mettre en œuvre notre modèle final qui peut prendre en entrée un fichier audio au format WAV, nous avons utilisé une API Flask développée en Python pour héberger ce modèle. Ce modèle utilise la bibliothèque "speech_recognition" pour transcrire le mot prononcé par l'utilisateur en un texte compréhensible.<br>
+Ce code se concentre sur la préparation de l'audio reçu du front-end en format base64. Il le décode en un fichier MP3, puis le convertit en un fichier WAV avant de l'envoyer à la fonction de transcription. Une fois la transcription terminée, le texte est envoyé au front-end pour être affiché en tant que réponse de l'utilisateur.<br>
+Les détails de code se trouvent dans le dossier **ML** *(main.py)*
+ 
 
 ## Partie 2: Développement de l'interface utilisateur: Back-End + Front-End
-### Front-End
-Pour cette partie on a developé sur react. La première page est la page de login. 
+- ### Front-End
+Nous avons utilisé ReactJS pour développer la partie frontend du projet. Elle comprend l'affichage de la page d'inscription ou de connexion de l'utilisateur, ainsi que l'affichage du jeu Quiz qui permet à l'utilisateur de répondre en utilisant son microphone. Il est important de noter que le frontend est api rest qui communique avec le backend pour obtenir les questions à afficher et envoyer les informations du formulaire saisi par l'utilisateur (cette partie n'est pas encore finalisée !), ainsi qu'avec le modèle ML pour obtenir la transcription du texte qui sera affiché en tant que réponse de l'utilisateur.<br>
+Les détails de code se trouvent dans le dossier **front-end_web**<br>
+- ### Back-End
 
-Login : représente un formulaire de connexion. Le composant utilise la fonctionnalité de gestion d'état de React avec le hook useState pour gérer les valeurs des entrées email et mot de passe. La fonction handleSubmit est utilisée pour gérer l'événement de soumission du formulaire et afficher l'email dans la console. Les entrées du formulaire sont des composants contrôlés et leurs valeurs sont stockées dans les variables d'état 'email' et 'pass'. Il y a un bouton qui, lorsqu'il est cliqué, appelle la fonction props.onFormSwitch et passe l'argument 'Quiz' en argument. Il y a également un bouton qui, lorsqu'il est cliqué, appelle la fonction props.onFormSwitch et passe l'argument 'register' en argument.
-
-register : gère l'inscription d'un nouvel utilisateur. Il utilise la méthode useState pour gérer les états de trois champs de formulaire : email, mot de passe et nom complet. Lorsque l'utilisateur soumet le formulaire en cliquant sur le bouton "S'inscrire", la méthode handleSubmit est appelée pour prévenir la soumission par défaut et afficher les données entrées par l'utilisateur dans la console. Si l'utilisateur a déjà un compte, il peut cliquer sur le bouton "Déjà inscrit ? Connectez-vous ici" pour basculer vers le formulaire de connexion.
-
-Quiz : permet à un utilisateur de choisir des thèmes pour un quiz. Le composant utilise un tableau de thèmes appelé themes et stocke les thèmes sélectionnés par l'utilisateur dans un état local appelé selectedThemes.
-Lorsqu'un utilisateur clique sur une case à cocher, la fonction handleChange est appelée et met à jour selectedThemes en ajoutant ou en supprimant le thème correspondant.
-Le composant affiche un formulaire qui affiche tous les thèmes contenus dans le tableau themes sous forme de cases à cocher. Si un thème est sélectionné, sa case à cocher sera cochée.
-Enfin, il y a un bouton qui appelle une fonction onFormSwitch passée en tant que propriété au composant pour permettre à l'utilisateur de démarrer le quiz.
-
-Audio : crée un composant React qui permet de faire un enregistrement audio. Il utilise une bibliothèque appelée "AudioRecorder" pour enregistrer la voix de l'utilisateur. Il affiche également une question et une sélection de réponses et calcule le score de l'utilisateur en fonction de sa réponse. Le score est affiché à l'écran.
-
-### Back-End
-Cette partie est basé sur NodeJS
-
-app : Ce code crée une application Express et utilise des routes pour les questions et les utilisateurs. Il utilise également le middleware CORS pour permettre les demandes croisées et écoute sur le port 3033 en affichant un message de démarrage du serveur.
-
-Question : Ce code importe express et le modèle Question et Reponse de la base de données.
-Il crée un routeur pour les questions, avec deux routes. La première route est pour obtenir toutes les questions ou une catégorie spécifique de questions en fonction des paramètres de requête. La deuxième route est pour créer une nouvelle question avec des réponses associées.
-
-user : Ce code définit un routeur pour les utilisateurs en utilisant le framework Express.js. Le routeur contient deux routes principales: une pour récupérer toutes les réponses enregistrées et une autre pour envoyer de nouvelles réponses. La première route utilise la méthode findAll pour récupérer toutes les entrées dans la table des réponses et les renvoie en utilisant res.send. La deuxième route utilise la méthode post pour accepter des données envoyées par l'utilisateur, les affiche en utilisant console.log et renvoie un message simple "post user". Finalement, le routeur est exporté pour être utilisé dans un autre fichier.
-
-
- 
+Pour le développement du backend, nous utilisons Node.js avec le framework Express. Il définit la structure de la base de données et assure la communication avec celle-ci. Le backend envoie des requêtes POST sous forme de fichiers JSON pour alimenter la base de données avec les questions du quiz, et des requêtes GET pour récupérer les questions désirées. En plus de cela, le backend communique également avec le frontend pour envoyer les questions ou les informations de l'utilisateur nécessaires (cette partie est à compléter aussi !).<br>
+En ce qui concerne la base de données, nous avons choisi MySQL qui sera hébergée dans le cloud grâce à la solution RDS (Amazon Relational Databases) d'AWS. Cela permet d'attribuer une adresse IP à cette base de données pour que le backend puisse communiquer avec elle.<br>
+Les détails de code se trouvent dans le dossier **back-end**<br>
 ## Partie 3: Hébergement Cloud
 
-Pour l'hébergement dans le cloud. 
-On utilise l'instance EC2 pour déployer la partie Back et front, le modèle de machine learning entraînée est déployé dans une fonction lambda. Pour la base de données MySQL a été déployer dans un moteur de base de donnée RDS d'Amazon.
-Le back récupère les questions de RDS et les transfère sous format json vers le front. 
-L'utilsateur répond en audio. Un fichier ".wav" va être transféré vers la fonction lambda pour être traité et convertit en texte. 
-La fonction Lambda renvoie par la suite le texte vers le front.
+- La base de données des questions est stockée dans la solution de déployement de base de données relationnelles **RDS** proposée par AWS.
+<img src="https://user-images.githubusercontent.com/63628060/218280449-53dbd3de-d495-466c-a2cc-3ed268c1fd8b.png" alt="c" width="400" height="200"/>
+<br>
+- Tous les autres serveurs backend, frontend et l'API du modèle ML sont déployés sur une instance EC2 utilisant une image Ubuntu qui a été configurée pour prendre en charge tous les modules nécessaires pour assurer une communication adéquate entre les serveurs.<br>
+<img src="https://user-images.githubusercontent.com/63628060/218280741-8189e150-d9dc-4844-8a3b-0cc3fad72b68.png" alt="c" width="400" height="200"/>
 
+<br> 
 
+### NOTE : <br>
+Nous avons commencé en utilisant la solution AWS Lambda pour déployer notre modèle ML, mais cela n'a pas été possible en raison du grand volume du fichier zip contenant les dépendances du code du modèle. Nous aurions pu stocker ces dépendances dans un bucket S3 et y accéder à partir de la fonction Lambda, mais le compte AWS étudiant ne nous permettait pas de configurer les autorisations nécessaires pour cela.
 
 
 
